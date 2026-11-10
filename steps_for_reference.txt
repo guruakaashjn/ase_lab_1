@@ -1,0 +1,8 @@
+Guru Akaash@LAPTOP-0HGTUFFB MINGW64 ~
+$ echo 'export PATH="$HOME/.opencode/bin:$HOME/bin:$PATH"' >> ~/.bashrc
+
+Guru Akaash@LAPTOP-0HGTUFFB MINGW64 ~
+$ source ~/.bashrc
+
+Guru Akaash@LAPTOP-0HGTUFFB MINGW64 ~
+$ opencode
