@@ -2,16 +2,24 @@
 
 Starter material for Lab 1. The tasks, deadlines and grading are described on the lab sheet.
 
+## Group Members
+
+1. Guru Akaash Nagaraj Janthalur -7397321
+2. Yashas Purushotama - 7393419
+3. Sai Dheeraj Reddy Banda -7399879
+4. Srivallabh Tippa - 7392258
+5. Aniket Anandakumar Boryal -7400739
+
 ## Access to the UPB AI Gateway (do this first)
 
 Every group member needs their own API key. Official guide: https://hilfe.uni-paderborn.de/AI-Gateway
 
 1. **Activate the service** (once): log in to the Service Portal https://sp.upb.de/ with your university account →
-   *Benutzerverwaltung* → *Weitere Dienste* → tab *Lehre und Studium* → *KI-Chat-Oberfläche* → *Optionen* → *Beantragen*.
+   _Benutzerverwaltung_ → _Weitere Dienste_ → tab _Lehre und Studium_ → _KI-Chat-Oberfläche_ → _Optionen_ → _Beantragen_.
    The request is approved automatically.
 2. **Be in the university network:** the gateway only works from the university network (e.g. eduroam on campus)
    or via the university VPN. From home, connect the VPN first: https://hilfe.uni-paderborn.de/VPN_einrichten
-3. **Create a key:** open https://ai-gateway.upb.de, log in with your university account, click *API-Key erstellen*
+3. **Create a key:** open https://ai-gateway.upb.de, log in with your university account, click _API-Key erstellen_
    and copy the key (`sk-...`). Store it safely; you can't see it again.
 4. Keys **expire** after some time. If calls suddenly fail with `401`, create a new key and update your `.env`.
 5. The terms of use of the university's AI services apply to the API as well.
@@ -39,11 +47,11 @@ Run all commands from this directory (the repository root).
 
 ## Models, budget and limits
 
-| Purpose | Model id | Cost |
-|---|---|
-| Default for all tasks (chat, agents, tool calling, judge) | `openai.gpt-6-luna` | $0.10 / 1M input tokens, $0.50 / 1M output tokens |
-| Free fallback | `kiconnect.qwen3.8-27b` | free |
-| Embeddings | `kiconnect.qwen3-embedding-8b` (fallback: `kiconnect.e5-mistral-7b-instruct`) | free |
+| Purpose                                                   | Model id                                                                      | Cost                                              |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
+| Default for all tasks (chat, agents, tool calling, judge) | `openai.gpt-6-luna`                                                           | $0.10 / 1M input tokens, $0.50 / 1M output tokens |
+| Free fallback                                             | `kiconnect.qwen3.8-27b`                                                       | free                                              |
+| Embeddings                                                | `kiconnect.qwen3-embedding-8b` (fallback: `kiconnect.e5-mistral-7b-instruct`) | free                                              |
 
 - **Budget:** every student has **$20 per month** on the gateway. With `gpt-6-luna` the whole lab costs a group
   a few dollars, so you have plenty of room. It only gets expensive if you switch to one of the large models, which you don't need.
@@ -62,22 +70,21 @@ Run all commands from this directory (the repository root).
 
 ## Contents
 
-| Folder | Content |
-|---|---|
-| `common/` | `llm_client.py` (gateway client with logging), `site_checker.py`, `embed_images.py` |
-| `task1_opencode/` | OpenCode setup guide, config template, profile template |
-| `task2_own_agent/` | specification, style guide (55 documents) |
-| `task3_rag/` | PaderQueue dataset, questions, `evaluate.py`, `judge.py` |
-| `task4_tools/` | toy repository `tinyledger`, tool interface, public tests, mock model |
-
+| Folder             | Content                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| `common/`          | `llm_client.py` (gateway client with logging), `site_checker.py`, `embed_images.py` |
+| `task1_opencode/`  | OpenCode setup guide, config template, profile template                             |
+| `task2_own_agent/` | specification, style guide (55 documents)                                           |
+| `task3_rag/`       | PaderQueue dataset, questions, `evaluate.py`, `judge.py`                            |
+| `task4_tools/`     | toy repository `tinyledger`, tool interface, public tests, mock model               |
 
 ## Troubleshooting
 
-| Problem | Try this |
-|---|---|
-| `Command 'uv' not found` | Install uv (step 0 above) and open a new terminal, or use the venv route without uv |
-| `401 Unauthorized` | Key missing in `.env`, or expired: create a new one at https://ai-gateway.upb.de |
-| Connection timeout / connection refused | You are outside the university network. Connect the university VPN |
+| Problem                                 | Try this                                                                            |
+| --------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Command 'uv' not found`                | Install uv (step 0 above) and open a new terminal, or use the venv route without uv |
+| `401 Unauthorized`                      | Key missing in `.env`, or expired: create a new one at https://ai-gateway.upb.de    |
+| Connection timeout / connection refused | You are outside the university network. Connect the university VPN                  |
 
 ## Rules
 
