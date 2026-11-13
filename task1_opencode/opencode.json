@@ -6,7 +6,7 @@
       "name": "UPB AI Gateway",
       "options": {
         "baseURL": "https://ai-gateway.uni-paderborn.de/v1",
-        "apiKey": "sk-zsAdeOJQAA--oiUFI-bsJA"
+        "apiKey": "{env:UPB_AI_GATEWAY_KEY}"
       },
       "models": {
         "openai.gpt-6-luna": {
