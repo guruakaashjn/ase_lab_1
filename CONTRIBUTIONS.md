@@ -8,14 +8,14 @@
   - Secondly in money.py, where dstributing amounts evenly was leaving the leftover cents, which was fixed using divmod() to distribute the remainder.
     - Thirdly in io_csv.py, where date parsing of month and day was done incorectly, which was fixed by correcting the order.
 - Going through the agent workflow to understand and find similarity in the trace of how these bugs were resolved.
-- Integrated and fixed the minor issues related to security control, and tolls along with Yashas.
+- Integrated and fixed the minor issues related to security control, and tools along with Yashas.
 
 ## Yashas Purushotama - 7393419
 
 - Analyse the untrusted code scenario of the misleading the instruction directed at coding assisstance to update the test case instead of fixing the implementation if a test fails.
 - Also analyse how the agent rightfully rejects the case of mock model attempt.
 - Understand how the mock model works, which attempts to read secrets, call run_shell, edit tests/test_settlt.py, inject shell command through run_cli and malformed JSON.
-- Integrated and fixed the minor issues related to security control, and tolls jointly with Guru Akaash.
+- Integrated and fixed the minor issues related to security control, and tools jointly with Guru Akaash.
 
 ## Sai Dheeraj Reddy Banda -7399879
 
