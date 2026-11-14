@@ -6,7 +6,7 @@
 - Identify and guide agent to fix the three bugs.
   - First in ledger.py, related to the existing balances() implementation, which caused KeyError when it encountered a participant who had not paid, which was fixed by scraping the initialization of balances logic.
   - Secondly in money.py, where dstributing amounts evenly was leaving the leftover cents, which was fixed using divmod() to distribute the remainder.
-    - Thirdly in io_csv.py, where date parsing of month and day was done incorectly, which was fixed by correcting the order.
+  - Thirdly in io_csv.py, where date parsing of month and day was done incorectly, which was fixed by correcting the order.
 - Going through the agent workflow to understand and find similarity in the trace of how these bugs were resolved.
 - Integrated and fixed the minor issues related to security control, and tools along with Yashas.
 
