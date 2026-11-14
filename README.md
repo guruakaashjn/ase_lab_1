@@ -101,7 +101,7 @@ Embeddings are cached in `task3_rag/.cache/` (not submitted, > 50 MB). Results: 
 
 1. Clone/download the Lab 1 repository.
 2. Open the project root directory in the terminal.
-3. Ensure atleast Python v3.11 is installed and uv command installation setup is done.
+3. Ensure atleast `Python v3.11` is installed and `uv` command installation setup is done.
 
 ### To Run the Mock Agent
 
@@ -126,10 +126,10 @@ All 18 test cases should get passed.
 
 - All 25/25 workspace tests get passed.
 - Only these three source files would have got modified:
-  - src/tinyledger/ledger.py
-  - src/tinyledger/money.py
-  - src/tinyledger/io_csv.py
-- Check the execution trace at task4_tools/logs/trace.jsonl.
+  - `src/tinyledger/ledger.py`
+  - `src/tinyledger/money.py`
+  - `src/tinyledger/io_csv.py`
+- Check the execution trace at `task4_tools/logs/trace.jsonl`.
 
 ## Troubleshooting
 
