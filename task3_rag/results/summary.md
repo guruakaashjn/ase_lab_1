@@ -1,4 +1,4 @@
-# Task 3 – retrieval results (dev, 120 answerable questions, k=5)
+# Task 3 â€“ retrieval results (dev, 120 answerable questions, k=5)
 
 Unanswerable questions have no relevant documents; they only appear in the end-to-end (judge) results.
 

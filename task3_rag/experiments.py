@@ -37,7 +37,7 @@ CATEGORIES = ["identifier", "paraphrase", "multi-hop", "version", "unanswerable"
 def score(tag: str, rows: list[dict], questions: list[dict], k: int = 5) -> dict:
     report = ev.evaluate(rows, questions, k)
     if k == 5:
-        (RESULTS / f"metrics_{tag}.json").write_text(json.dumps(report, indent=2))
+        (RESULTS / f"metrics_{tag}.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report["summary"]
 
 
@@ -65,7 +65,7 @@ def fusion_sweep(size: int, overlap: int, questions: list[dict], llm: LLMClient)
     table = [evaluate_scores("weighted", float(w), lambda i, w=w: hybrid(bm25[i], dense[i], w))
              for w in np.round(np.arange(0, 1.01, 0.1), 2)]
     table.append(evaluate_scores("rrf", None, lambda i: rrf(bm25[i], dense[i])))
-    with (RESULTS / "hybrid_fusion_sweep.csv").open("w", newline="") as f:
+    with (RESULTS / "hybrid_fusion_sweep.csv").open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(table[0]))
         writer.writeheader()
         writer.writerows(table)
@@ -134,7 +134,7 @@ def main() -> None:
 
 def write_summary(summaries: dict, stats: dict, r3_tags: list[str], best_size: int, weight: float,
                   fusion: str) -> None:
-    with (RESULTS / "summary_retrieval.csv").open("w", newline="") as f:
+    with (RESULTS / "summary_retrieval.csv").open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["config", "category", "n", "recall@5", "precision@5"])
         for tag, s in summaries.items():
@@ -186,7 +186,7 @@ def write_summary(summaries: dict, stats: dict, r3_tags: list[str], best_size: i
         st = stats[tag]
         lines.append(f"| {tag} | {st['n_chunks']} | {st['indexing_s']} | {st['latency_mean_s']} | "
                      f"{st['latency_p95_s']} | {st['retrieval_tokens_per_query']} |")
-    (RESULTS / "summary.md").write_text("\n".join(lines) + "\n")
+    (RESULTS / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

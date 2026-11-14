@@ -118,7 +118,7 @@ def main() -> None:
              "cost_usd_total": round(llm.total_cost_usd, 5),
              "abstentions": sum(r["answer"] == ABSTENTION for r in rows)}
     RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / f"stats_generation_{cfg.tag}_{args.split}.json").write_text(json.dumps(stats, indent=2))
+    (RESULTS / f"stats_generation_{cfg.tag}_{args.split}.json").write_text(json.dumps(stats, indent=2), encoding="utf-8")
 
     if args.split == "test":
         out = HERE / "predictions_test.jsonl"

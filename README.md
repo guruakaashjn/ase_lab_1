@@ -78,6 +78,25 @@ Run all commands from this directory (the repository root).
 | `task3_rag/`       | PaderQueue dataset, questions, `evaluate.py`, `judge.py`                            |
 | `task4_tools/`     | toy repository `tinyledger`, tool interface, public tests, mock model               |
 
+## Task 3 – how to run (RAG under the microscope)
+
+All commands from the repository root, university VPN on, `.env` with your key (see Setup above).
+
+```bash
+python task3_rag/run_all.py        # whole pipeline, ~20-40 min the first time, well under $0.10
+```
+
+`run_all.py` runs these steps (each can also be run on its own):
+
+1. `task3_rag/experiments.py` – R1–R5 on the dev questions, 3 chunk sizes for R3, fusion sweep → `results/summary.md`
+2. `task3_rag/generate.py` + `task3_rag/judge.py` – answers + LLM judge for the 2 best configs (50 dev questions)
+3. `task3_rag/analyze.py` – `results/summary_judge.md`, `failure_analysis_*.md`, `judge_check_*.md`
+4. `task3_rag/generate.py --split test` – `task3_rag/predictions_test.jsonl` with the best config
+
+Our code: `rag_core.py` (chunking, BM25, embeddings with validation, HyDE, fusion), `retrieval.py`, `experiments.py`,
+`generate.py`, `analyze.py`, `run_all.py`. Given code (unchanged): `evaluate.py`, `judge.py`, `common/`.
+Embeddings are cached in `task3_rag/.cache/` (not submitted, > 50 MB). Results: `task3_rag/results/`.
+
 ## Troubleshooting
 
 | Problem                                 | Try this                                                                            |

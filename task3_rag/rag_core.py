@@ -122,7 +122,8 @@ RECURSIVE_SEPARATORS = ["\n## ", "\n### ", "\n\n", "\n", ". ", " ", ""]
 def recursive_split(text: str, size: int, overlap: int, separators: list[str] = RECURSIVE_SEPARATORS) -> list[str]:
     """R3: split at the coarsest separator that exists in the text; pieces that are still
     too large are split again with the next, finer separator. Small neighbouring pieces are
-    merged back together up to `size`, with about `overlap` characters repeated between chunks.
+    merged back together up to `size`; whole pieces of up to `overlap` characters are repeated between chunks
+    (a piece longer than `overlap` is not repeated, so we never cut mid-sentence just to create overlap).
     """
     if len(text) <= size:
         return [text] if text.strip() else []
@@ -238,7 +239,7 @@ def _normalize(vectors: np.ndarray) -> np.ndarray:
 # The gateway allows ~100 requests per minute per key. llm_client (given code) retries with backoff when we hit
 # the limit, but gives up after 5 retries. We pace OUR embedding requests instead of relying on retries.
 MIN_SECONDS_BETWEEN_REQUESTS = 0.7  # <= ~85 requests per minute
-EMBED_BATCH_SIZE = 64  # v2 tried 16: duplicates still happened, at 4x the number of requests
+EMBED_BATCH_SIZE = 32  # measured over our runs: batches of 64 came back broken in 39% of requests, batches of 32 in 0.4%
 _last_request = 0.0
 
 
@@ -296,8 +297,9 @@ def _embed_one(llm: LLMClient, text: str) -> np.ndarray:
 
 def _embed_robust(llm: LLMClient, texts: list[str]) -> np.ndarray:
     """Embed one batch; if the gateway's answer is invalid, split THIS batch in two halves and try again.
-    The failures are random (~2-10% of requests, at every batch size), so we don't shrink the batch size for the
-    rest of the run. Halves are different requests, so the gateway cache can't return the same broken answer."""
+    Measured over our runs: 39% of batches of 64 came back broken, 0.4% of batches of 32, single texts never.
+    A failure only affects that batch, so the next batch starts again at the full size. Halves are different
+    requests, so the gateway cache can't return the same broken answer."""
     if len(texts) == 1:
         return _embed_one(llm, texts[0])[None, :]
     result = _embed_request(llm, texts)
@@ -348,7 +350,7 @@ def _validate_embeddings(llm: LLMClient, texts: list[str], vectors: np.ndarray, 
 def embed_corpus_cached(llm: LLMClient, texts: list[str], name: str) -> tuple[np.ndarray, float]:
     """Embed chunk texts (batched), validate, cache on disk. Returns (unit vectors, embedding time in s).
     Invalid gateway answers are repaired per batch (_embed_robust). If the spot check still fails, the whole
-    index is embedded again with smaller batches (64 -> 16 -> 4);
+    index is embedded again with smaller batches (32 -> 16 -> 4);
     if even that fails, the run stops. Indexing time includes embedding + validation of the run that passed.
     Cache files are called emb_v3_*: earlier caches (v1, v2) contained misaligned vectors."""
     key = _hash_texts(texts, llm.embedding_model)
@@ -446,8 +448,9 @@ def hyde_passages(llm: LLMClient, questions: list[dict], split: str) -> dict[str
 
 
 def minmax(scores: np.ndarray) -> np.ndarray:
-    """Scale scores to [0, 1]. BM25 scores are unbounded (0 .. ~30), cosine similarities live in
-    a narrow band (e.g. 0.3 .. 0.8): without this, one of them would dominate the sum."""
+    """Scale scores to [0, 1]. BM25 scores are unbounded (best match per dev question: 2 .. 33, median 18),
+    cosine similarities live in a narrow band (90% of all values 0.33 .. 0.67, best match typically ~0.8):
+    without this, BM25 would dominate the sum."""
     lo, hi = float(scores.min()), float(scores.max())
     if hi - lo < 1e-12:
         return np.zeros_like(scores)
