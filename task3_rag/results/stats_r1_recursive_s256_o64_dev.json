@@ -1,0 +1,18 @@
+{
+  "tag": "r1_recursive_s256_o64",
+  "config": {
+    "name": "r1",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "split": "dev",
+  "n_questions": 150,
+  "n_chunks": 2923,
+  "avg_chunk_chars": 220.5,
+  "indexing_s": 0.3,
+  "latency_mean_s": 0.0131,
+  "latency_p95_s": 0.0249,
+  "retrieval_tokens_per_query": 0.0
+}

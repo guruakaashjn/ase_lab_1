@@ -1,0 +1,18 @@
+{
+  "tag": "r5_recursive_s256_o64_w0.4",
+  "config": {
+    "name": "r5",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.4,
+    "fusion": "weighted"
+  },
+  "split": "dev",
+  "n_questions": 150,
+  "n_chunks": 2923,
+  "avg_chunk_chars": 220.5,
+  "indexing_s": 169.88,
+  "latency_mean_s": 6.3557,
+  "latency_p95_s": 11.6518,
+  "retrieval_tokens_per_query": 519.5
+}

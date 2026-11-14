@@ -1,0 +1,58 @@
+{
+  "r3_recursive_s256_o64": {
+    "name": "r3",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "r3_recursive_s512_o64": {
+    "name": "r3",
+    "size": 512,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "r3_recursive_s1024_o64": {
+    "name": "r3",
+    "size": 1024,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "r1_recursive_s256_o64": {
+    "name": "r1",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "r2_fixed_s256_o64": {
+    "name": "r2",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "r4_recursive_s256_o64_w0.4": {
+    "name": "r4",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.4,
+    "fusion": "weighted"
+  },
+  "r4_recursive_s256_o64_rrf": {
+    "name": "r4",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.4,
+    "fusion": "rrf"
+  },
+  "r5_recursive_s256_o64_w0.4": {
+    "name": "r5",
+    "size": 256,
+    "overlap": 64,
+    "weight": 0.4,
+    "fusion": "weighted"
+  }
+}

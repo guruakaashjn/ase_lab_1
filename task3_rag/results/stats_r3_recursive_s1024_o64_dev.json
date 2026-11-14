@@ -1,0 +1,18 @@
+{
+  "tag": "r3_recursive_s1024_o64",
+  "config": {
+    "name": "r3",
+    "size": 1024,
+    "overlap": 64,
+    "weight": 0.3,
+    "fusion": "weighted"
+  },
+  "split": "dev",
+  "n_questions": 150,
+  "n_chunks": 987,
+  "avg_chunk_chars": 553.4,
+  "indexing_s": 59.88,
+  "latency_mean_s": 0.2813,
+  "latency_p95_s": 0.7143,
+  "retrieval_tokens_per_query": 42.4
+}

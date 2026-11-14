@@ -1,0 +1,12 @@
+{
+  "tag": "r5_recursive_s256_o64_w0.4",
+  "split": "dev",
+  "n": 50,
+  "generation_latency_mean_s": 2.049,
+  "generation_prompt_tokens_per_query_est": 1068.5,
+  "llm_usage": "50 calls, 53896 prompt + 2108 completion tokens, $0.00660",
+  "llm_prompt_tokens_per_query": 1077.9,
+  "llm_completion_tokens_per_query": 42.2,
+  "cost_usd_total": 0.0066,
+  "abstentions": 20
+}
