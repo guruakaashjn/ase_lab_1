@@ -105,13 +105,13 @@ Embeddings are cached in `task3_rag/.cache/` (not submitted, > 50 MB). Results: 
 
 ### To Run the Mock Agent
 
-1. uv sync
-2. uv run python task4_tools/reset_workspace.py
-3. uv run python task4_tools/agent.py --mock
+1. `uv sync`
+2. `uv run python task4_tools/reset_workspace.py`
+3. `uv run python task4_tools/agent.py --mock`
 
 ### To run the test suite
 
-1. uv run pytest task4_tools/tests -q
+1. `uv run pytest task4_tools/tests -q`
 
 All 18 test cases should get passed.
 
