@@ -53,12 +53,12 @@ def judge_summary(tags: list[str]) -> None:
                          f"{sum(r['abstained'] for r in items)} |")
         stats_path = RESULTS / f"stats_generation_{tag}_dev.json"
         if stats_path.exists():
-            st = json.loads(stats_path.read_text())
+            st = json.loads(stats_path.read_text(encoding="utf-8"))
             lines += ["", f"Generation: {st['llm_prompt_tokens_per_query']} prompt + "
                           f"{st['llm_completion_tokens_per_query']} completion tokens per question, "
                           f"mean latency {st['generation_latency_mean_s']} s, cost ${st['cost_usd_total']} for {st['n']} questions."]
         lines.append("")
-    (RESULTS / "summary_judge.md").write_text("\n".join(lines))
+    (RESULTS / "summary_judge.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def failure_analysis(tag: str) -> None:
@@ -106,7 +106,7 @@ def failure_analysis(tag: str) -> None:
         if missing:
             lines += ["", "**Missing:** " + "; ".join(" or ".join(g) for g in missing)]
         lines += ["", "**Why (write this yourself):** ..."]
-    (RESULTS / f"failure_analysis_{tag}.md").write_text("\n".join(lines) + "\n")
+    (RESULTS / f"failure_analysis_{tag}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def judge_check(tag: str) -> None:
@@ -135,7 +135,7 @@ def judge_check(tag: str) -> None:
                   f"**Judge faithfulness:** {fmt(j['faithfulness'])}"
                   + (f" (unsupported claims: {unsupported})" if unsupported else ""), "",
                   "**My verdict / comment:** ..."]
-    (RESULTS / f"judge_check_{tag}.md").write_text("\n".join(lines) + "\n")
+    (RESULTS / f"judge_check_{tag}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> None:

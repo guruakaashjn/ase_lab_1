@@ -389,7 +389,7 @@ No files found
 6:       "name": "UPB AI Gateway",
 7:       "options": {
 8:         "baseURL": "https://ai-gateway.uni-paderborn.de/v1",
-9:         "apiKey": "sk-zsAdeOJQAA--oiUFI-bsJA"
+9:         "apiKey": "REDACTED"
 10:       },
 11:       "models": {
 12:         "openai.gpt-6-luna": {

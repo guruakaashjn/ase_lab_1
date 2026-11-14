@@ -184,20 +184,20 @@ def run(cfg: Config, split: str = "dev", llm: LLMClient | None = None, questions
         "latency_p95_s": round(float(np.percentile(latency, 95)), 4),
         "retrieval_tokens_per_query": round(float(np.mean(tokens)), 1),
     }
-    (RESULTS / f"stats_{cfg.tag}_{split}.json").write_text(json.dumps(stats, indent=2))
+    (RESULTS / f"stats_{cfg.tag}_{split}.json").write_text(json.dumps(stats, indent=2), encoding="utf-8")
     register(cfg)
     return {"rows": rows, "stats": stats, "path": out}
 
 
 def register(cfg: Config) -> None:
     path = RESULTS / "configs.json"
-    configs = json.loads(path.read_text()) if path.exists() else {}
+    configs = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     configs[cfg.tag] = asdict(cfg)
-    path.write_text(json.dumps(configs, indent=2))
+    path.write_text(json.dumps(configs, indent=2), encoding="utf-8")
 
 
 def config_from_tag(tag: str) -> Config:
-    configs = json.loads((RESULTS / "configs.json").read_text())
+    configs = json.loads((RESULTS / "configs.json").read_text(encoding="utf-8"))
     return Config(**configs[tag])
 
 
